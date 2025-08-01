@@ -3,4 +3,6 @@ class HomepageController < ApplicationController
     # This action will render the homepage view
     render "index"
   end
+
+
 end
