@@ -1,6 +1,8 @@
 class HomepageController < ApplicationController
   def home
     # This action will render the homepage view
-    render "home"
+    render "index"
   end
+
+
 end
