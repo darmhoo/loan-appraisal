@@ -1,0 +1,26 @@
+<div class="bg-gray-800 text-white fixed top-0 left-0 w-full shadow-lg z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Left section: Logo or title -->
+    <div class="text-xl font-semibold tracking-wide">
+      <%= link_to "Loan Appraisal", root_path, class: "hover:text-yellow-300 transition" %>
+    </div>
+
+    <div>
+        <%= link_to "Apply Loan", new_customer_info_path %>
+    </div>
+
+    <!-- Right section: Navigation links -->
+    <ul class="flex space-x-6 text-sm font-medium">
+      <li>
+        <%= link_to "Sign in", new_user_session_path, class: "hover:text-yellow-300 transition" %>
+      </li>
+      <li>
+        <%= link_to "Sign up", new_user_registration_path, class: "hover:text-yellow-300 transition" %>
+      </li>
+      <li>
+        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "hover:text-red-400 transition" %>
+      </li>
+    </ul>
+  </div>
+</div>
+

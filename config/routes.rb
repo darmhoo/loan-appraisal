@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :customer_infos
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,5 +13,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root to: "homepage#home"
+  root to: "customer_infos#index"
 end
