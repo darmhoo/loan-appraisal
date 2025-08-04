@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  loan_application: one
+  loan_amount: 9.99
+  loan_purpose: MyString
+  loan_tenure: MyString
+  repayment_frequency: MyString
+
+two:
+  loan_application: two
+  loan_amount: 9.99
+  loan_purpose: MyString
+  loan_tenure: MyString
+  repayment_frequency: MyString

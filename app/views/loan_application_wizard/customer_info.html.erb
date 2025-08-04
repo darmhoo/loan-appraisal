@@ -1,0 +1,48 @@
+<div class="max-w-3xl mx-auto p-6 mt-8 bg-white shadow-lg rounded-xl">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Customer Information</h2>
+
+  <%= form_for @form, url: wizard_path, method: :put, html: { class: "space-y-6" } do |f| %>
+
+    <div>
+      <%= f.label :full_name, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :full_name, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :contact, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :contact, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :id_number, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :id_number, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :employment_status, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :employment_status, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :employer, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :employer, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+    </div>
+
+    <div class="grid grid-cols-2 gap-6">
+      <div>
+        <%= f.label :income, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.number_field :income, step: "0.01", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+
+      <div>
+        <%= f.label :expenses, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.number_field :expenses, step: "0.01", class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.submit "Next", class: "w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition" %>
+    </div>
+
+  <% end %>
+</div>

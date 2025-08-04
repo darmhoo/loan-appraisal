@@ -1,0 +1,35 @@
+<table class="min-w-full bg-white shadow-md rounded-md overflow-hidden">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="text-left px-4 py-2">Customer Name</th>
+      <th class="text-left px-4 py-2">Contact</th>
+      <th class="text-left px-4 py-2">Date Applied</th>
+      <th class="text-left px-4 py-2">Status</th>
+      <th class="text-left px-4 py-2">Action</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <% @customer_infos.each do |info| %>
+      <% app = info.loan_application %>
+      <% step = next_incomplete_step(app) %>
+
+      <tr class="border-b">
+        <td class="px-4 py-2"><%= info.full_name %></td>
+        <td class="px-4 py-2"><%= info.contact %></td>
+        <td class="px-4 py-2"><%= info.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
+        <td class="px-4 py-2">
+          <span class="<%= app.status == "completed" ? 'text-green-600 font-semibold' : 'text-yellow-500' %>">
+            <%= app.status.titleize %>
+          </span>
+        </td>
+        <td class="px-4 py-2">
+          <%= link_to "Resume", loan_application_wizard_path(app, step),
+              class: "bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-3 rounded text-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
