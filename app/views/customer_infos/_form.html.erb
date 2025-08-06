@@ -1,0 +1,52 @@
+<%= form_with(model: customer_info, class: "contents") do |form| %>
+  <% if customer_info.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(customer_info.errors.count, "error") %> prohibited this customer_info from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% customer_info.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:full_name].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:full_name].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :contact %>
+    <%= form.text_field :contact, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:contact].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:contact].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :identication %>
+    <%= form.text_field :identication, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:identication].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:identication].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :employment %>
+    <%= form.text_field :employment, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:employment].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:employment].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :employer %>
+    <%= form.text_field :employer, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:employer].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:employer].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :income %>
+    <%= form.text_field :income, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:income].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:income].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :expenses %>
+    <%= form.text_field :expenses, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer_info.errors[:expenses].none?, "border-red-400 focus:outline-red-600": customer_info.errors[:expenses].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

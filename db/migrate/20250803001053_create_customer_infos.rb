@@ -1,9 +1,5 @@
-class DropCustomerInfosTable < ActiveRecord::Migration[7.0] # or [8.0] depending on your Rails version
-  def up
-    drop_table :customer_infos
-  end
-
-  def down
+class CreateCustomerInfos < ActiveRecord::Migration[8.0]
+  def change
     create_table :customer_infos do |t|
       t.string :full_name
       t.string :contact
@@ -12,6 +8,7 @@ class DropCustomerInfosTable < ActiveRecord::Migration[7.0] # or [8.0] depending
       t.string :employer
       t.decimal :income
       t.decimal :expenses
+
       t.timestamps
     end
   end
