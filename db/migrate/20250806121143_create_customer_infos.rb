@@ -3,11 +3,12 @@ class CreateCustomerInfos < ActiveRecord::Migration[8.0]
     create_table :customer_infos do |t|
       t.string :full_name
       t.string :contact
-      t.string :identication
-      t.string :employment
+      t.string :id_number
+      t.string :employment_status
       t.string :employer
       t.decimal :income
       t.decimal :expenses
+      t.references :loan_application, null: false, foreign_key: true
 
       t.timestamps
     end

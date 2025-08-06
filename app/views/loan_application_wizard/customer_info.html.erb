@@ -1,0 +1,40 @@
+<h1>Customer Info</h1>
+
+<%= form_for @form, url: wizard_path, method: :put do |f| %>
+  <div>
+    <%= f.label :full_name %>
+    <%= f.text_field :full_name %>
+  </div>
+
+  <div>
+    <%= f.label :contact %>
+    <%= f.text_field :contact %>
+  </div>
+
+  <div>
+    <%= f.label :id_number %>
+    <%= f.text_field :id_number %>
+  </div>
+
+  <div>
+    <%= f.label :employment_status %>
+    <%= f.text_field :employment_status %>
+  </div>
+
+  <div>
+    <%= f.label :employer %>
+    <%= f.text_field :employer %>
+  </div>
+
+  <div>
+    <%= f.label :income %>
+    <%= f.number_field :income %>
+  </div>
+
+  <div>
+    <%= f.label :expenses %>
+    <%= f.number_field :expenses %>
+  </div>
+
+  <%= f.submit "Next →", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+<% end %>

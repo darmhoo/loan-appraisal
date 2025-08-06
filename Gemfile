@@ -7,6 +7,9 @@ gem "propshaft"
 
 gem "devise"
 
+gem 'wicked'
+
+
 gem "pg", "~> 1.5", ">= 1.5.9"
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", ">= 2.1"
