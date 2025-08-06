@@ -3,17 +3,19 @@
 one:
   full_name: MyString
   contact: MyString
-  identication: MyString
-  employment: MyString
+  id_number: MyString
+  employment_status: MyString
   employer: MyString
   income: 9.99
   expenses: 9.99
+  loan_application: one
 
 two:
   full_name: MyString
   contact: MyString
-  identication: MyString
-  employment: MyString
+  id_number: MyString
+  employment_status: MyString
   employer: MyString
   income: 9.99
   expenses: 9.99
+  loan_application: two
