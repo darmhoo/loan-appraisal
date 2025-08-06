@@ -53,7 +53,7 @@ class LoanApplicationWizardController < ApplicationController
 
   private
 
-  def update_loan_status!
+  def update_loan_status
     completed = %i[
       customer_info loan_detail financial_analysis
       credit_history collateral_info risk_assessment
