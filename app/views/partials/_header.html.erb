@@ -4,31 +4,23 @@
     <div class="text-xl font-semibold tracking-wide">
       <%= link_to "Loan Appraisal", root_path, class: "hover:text-yellow-300 transition" %>
     </div>
-
     <div>
-        <%= link_to "Apply Loan", start_loan_application_path %>
-
+      <%= link_to "Apply Loan", start_loan_application_path %>
     </div>
-
     <!-- Right section: Navigation links -->
     <ul class="flex space-x-6 text-sm font-medium">
-      
-      <% if user_signed_in %>
-         <li>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "hover:text-red-400 transition" %>
-      </li>
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "hover:text-red-400 transition" %>
+        </li>
       <% else%>
-<li>
-        <%= link_to "Sign ins", new_user_session_path, class: "hover:text-yellow-300 transition" %>
-      </li>
-      <li>
-        <%= link_to "Sign up", new_user_registration_path, class: "hover:text-yellow-300 transition" %>
-      </li>
+        <li>
+          <%= link_to "Sign in", new_user_session_path, class: "hover:text-yellow-300 transition" %>
+        </li>
+        <li>
+          <%= link_to "Sign up", new_user_registration_path, class: "hover:text-yellow-300 transition" %>
+        </li>
       <% end %>
-      
-      
-     
     </ul>
   </div>
 </div>
-
