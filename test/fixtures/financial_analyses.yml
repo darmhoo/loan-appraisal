@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  income_vs_expenses: MyString
+  debt_to_income_ratio: MyString
+  existing_loans: MyString
+  savings_assets: MyString
+  loan_application: one
+
+two:
+  income_vs_expenses: MyString
+  debt_to_income_ratio: MyString
+  existing_loans: MyString
+  savings_assets: MyString
+  loan_application: two

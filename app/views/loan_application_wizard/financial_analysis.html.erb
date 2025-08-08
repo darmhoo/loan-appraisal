@@ -1,0 +1,35 @@
+<h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Financial Analysis</h1>
+
+<div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+  <%= form_for @financial_analysis, url: wizard_path, method: :put, html: { class: "space-y-5" } do |f| %>
+
+    <!-- Income vs Expenses -->
+    <div>
+      <%= f.label :income_vs_expenses, "Income vs Expenses", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :income_vs_expenses, placeholder: "e.g., Income 5000 / Expenses 3000", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Debt to Income Ratio -->
+    <div>
+      <%= f.label :debt_to_income_ratio, "Debt to Income Ratio (%)", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.number_field :debt_to_income_ratio, step: :any, placeholder: "e.g., 35", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Existing Loans -->
+    <div>
+      <%= f.label :existing_loans, "Existing Loans", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :existing_loans, placeholder: "List any ongoing loans with amounts", rows: 3, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Savings & Assets -->
+    <div>
+      <%= f.label :savings_assets, "Savings & Assets", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :savings_assets, placeholder: "Describe your savings, investments, and assets", rows: 3, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <%= f.submit "Next", class: "bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition" %>
+    </div>
+  <% end %>
+</div>

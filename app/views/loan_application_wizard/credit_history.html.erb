@@ -1,0 +1,26 @@
+<h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Credit History</h1>
+
+<div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+  <%= form_for @credit_history, url: wizard_path, method: :put, html: { class: "space-y-5" } do |f| %>
+
+    <div>
+      <%= f.label :credit_score, "Credit Score", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.number_field :credit_score, step: 1, placeholder: "e.g., 700", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :past_loan_repayment_behavior, "Past Loan Repayment Behavior", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :past_loan_repayment_behavior, rows: 3, placeholder: "Describe repayment history", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :defaults_or_late_payments, "Defaults or Late Payments", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :defaults_or_late_payments, rows: 3, placeholder: "List any defaults or late payments", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= f.submit "Next", class: "bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition" %>
+    </div>
+
+  <% end %>
+</div>

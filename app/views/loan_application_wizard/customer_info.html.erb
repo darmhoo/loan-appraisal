@@ -1,40 +1,46 @@
-<h1>Customer Info</h1>
+<h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Customer Information</h1>
 
-<%= form_for @form, url: wizard_path, method: :put do |f| %>
-  <div>
-    <%= f.label :full_name %>
-    <%= f.text_field :full_name %>
-  </div>
 
-  <div>
-    <%= f.label :contact %>
-    <%= f.text_field :contact %>
-  </div>
+<div class="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
+  <%= form_for @customer_info, url: wizard_path, method: :put, html: { class: "space-y-5" } do |f| %>
 
-  <div>
-    <%= f.label :id_number %>
-    <%= f.text_field :id_number %>
-  </div>
+    <div>
+      <%= f.label :full_name, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :full_name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
 
-  <div>
-    <%= f.label :employment_status %>
-    <%= f.text_field :employment_status %>
-  </div>
+    <div>
+      <%= f.label :contact, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :contact, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
 
-  <div>
-    <%= f.label :employer %>
-    <%= f.text_field :employer %>
-  </div>
+    <div>
+      <%= f.label :id_number, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :id_number, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
 
-  <div>
-    <%= f.label :income %>
-    <%= f.number_field :income %>
-  </div>
+    <div>
+      <%= f.label :employment_status, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :employment_status, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
 
-  <div>
-    <%= f.label :expenses %>
-    <%= f.number_field :expenses %>
-  </div>
+    <div>
+      <%= f.label :employer, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :employer, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
 
-  <%= f.submit "Next →", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
-<% end %>
+    <div>
+      <%= f.label :income, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.number_field :income, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= f.label :expenses, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.number_field :expenses, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= f.submit "Next", class: "bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition" %>
+    </div>
+  <% end %>
+</div>
