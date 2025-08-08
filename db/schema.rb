@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_06_121143) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_07_113148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,12 +28,34 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_06_121143) do
     t.index ["loan_application_id"], name: "index_customer_infos_on_loan_application_id"
   end
 
+  create_table "financial_analyses", force: :cascade do |t|
+    t.string "income_vs_expenses"
+    t.string "debt_to_income_ratio"
+    t.string "existing_loans"
+    t.string "savings_assets"
+    t.bigint "loan_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["loan_application_id"], name: "index_financial_analyses_on_loan_application_id"
+  end
+
   create_table "loan_applications", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_loan_applications_on_user_id"
+  end
+
+  create_table "loan_details", force: :cascade do |t|
+    t.decimal "loan_amount"
+    t.string "loan_purpose"
+    t.string "loan_tenure"
+    t.string "repayment_frequency"
+    t.bigint "loan_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["loan_application_id"], name: "index_loan_details_on_loan_application_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,5 +69,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_06_121143) do
   end
 
   add_foreign_key "customer_infos", "loan_applications"
+  add_foreign_key "financial_analyses", "loan_applications"
   add_foreign_key "loan_applications", "users"
+  add_foreign_key "loan_details", "loan_applications"
 end

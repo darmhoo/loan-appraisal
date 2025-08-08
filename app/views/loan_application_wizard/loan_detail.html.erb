@@ -1,0 +1,34 @@
+<div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-8">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Loan Details</h1>
+
+    <%= form_for @form, url: wizard_path, method: :put, html: { class: "space-y-6" } do |f| %>
+
+
+      <div>
+        <%= f.label :loan_amount, "Loan Amount", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.number_field :loan_amount, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm h-8 px-3 focus:ring-blue-500 focus:border-blue-500 text-base" %>
+      </div>
+
+      <div>
+        <%= f.label :loan_purpose, "Loan Purpose", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :loan_purpose, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm h-8 px-3 focus:ring-blue-500 focus:border-blue-500 text-base" %>
+      </div>
+
+      <div>
+        <%= f.label :loan_tenure, "Loan Tenure", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :loan_tenure, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm h-8 px-3 focus:ring-blue-500 focus:border-blue-500 text-base" %>
+      </div>
+
+      <div>
+        <%= f.label :repayment_frequency, "Repayment Frequency", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :repayment_frequency, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm h-8 px-3 focus:ring-blue-500 focus:border-blue-500 text-base" %>
+      </div>
+
+      <div class="pt-4">
+        <%= f.submit "Next →", class: "inline-flex cursor-pointer items-center px-6 py-3 bg-blue-600 border border-transparent rounded-md font-semibold text-white hover:bg-blue-700 transition duration-300 text-base" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
