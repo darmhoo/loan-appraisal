@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  credit_score: 1
+  past_loan_repayment_behavior: MyText
+  defaults_or_late_payments: MyText
+  loan_application: one
+
+two:
+  credit_score: 1
+  past_loan_repayment_behavior: MyText
+  defaults_or_late_payments: MyText
+  loan_application: two

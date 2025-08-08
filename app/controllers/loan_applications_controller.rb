@@ -1,25 +1,17 @@
-  class LoanApplicationsController < ApplicationController
-    before_action :authenticate_user!
+class LoanApplicationsController < ApplicationController
+  before_action :authenticate_user!
 
-    def index
-      @loan_applications = LoanApplication.includes(:customer_info).all
-    end
-
-    # def start
-    #   @loan_application = current_user.loan_applications.create!
-    #   redirect_to loan_application_loan_application_wizard_path(@loan_application, :customer_info)
-    # end
-
-    def start
-      redirect_to loan_application_loan_application_wizard_path("new", :customer_info)
-    end
-
-
-
-
-    def destroy
-      @loan_application = LoanApplication.find(params[:id])
-      @loan_application.destroy
-      redirect_to loan_applications_path, notice: "Customer deleted successfully."
-    end
+  def index
+    @loan_applications = current_user.loan_applications.includes(
+      :customer_info, 
+      :loan_detail,
+      :financial_analysis,
+      :credit_history
+      )
   end
+
+  # Start a loan application by creating a record only when first form is submitted
+  def start
+    redirect_to loan_application_wizard_path(:customer_info)
+  end
+end

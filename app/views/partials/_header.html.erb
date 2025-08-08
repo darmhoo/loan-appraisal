@@ -4,10 +4,13 @@
     <div class="text-xl font-semibold tracking-wide">
       <%= link_to "Loan Appraisal", root_path, class: "hover:text-yellow-300 transition" %>
     </div>
-    <div>
-      <%= link_to "Apply Loan", start_loan_application_path %>
-    </div>
-    <!-- Right section: Navigation links -->
+
+    <% if user_signed_in? %>
+      <%= link_to "Apply for Loan", start_loan_applications_path %>
+    <% end %>
+
+
+ 
     <ul class="flex space-x-6 text-sm font-medium">
       <% if user_signed_in? %>
         <li>
