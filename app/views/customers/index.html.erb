@@ -1,7 +1,12 @@
 <!-- app/views/customers/index.html.erb -->
 <h1 class="text-2xl font-bold mb-6">Customer Information</h1>
-
 <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+  <button>
+    <%=
+  link_to 'Download as Excel',
+  customers_path(format: :xlsx), class: "bg-green-500 outline p-2 text-white"
+%>
+  </button>
   <table class="min-w-full text-sm text-left text-gray-700">
     <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
       <tr>
