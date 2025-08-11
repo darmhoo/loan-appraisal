@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_08_105748) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_11_083453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "collaterals", force: :cascade do |t|
+    t.string "collateral_type"
+    t.decimal "valuation"
+    t.text "ownership_documents"
+    t.bigint "loan_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["loan_application_id"], name: "index_collaterals_on_loan_application_id"
+  end
 
   create_table "credit_histories", force: :cascade do |t|
     t.integer "credit_score"
@@ -68,6 +78,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_08_105748) do
     t.index ["loan_application_id"], name: "index_loan_details_on_loan_application_id"
   end
 
+  create_table "recommendations", force: :cascade do |t|
+    t.string "decision"
+    t.decimal "suggested_loan_amount"
+    t.decimal "interest_rate"
+    t.text "terms"
+    t.text "disbursement_conditions"
+    t.bigint "loan_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["loan_application_id"], name: "index_recommendations_on_loan_application_id"
+  end
+
+  create_table "risk_assessments", force: :cascade do |t|
+    t.string "risk_profile"
+    t.decimal "loan_to_value_ratio"
+    t.text "market_conditions"
+    t.bigint "loan_application_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["loan_application_id"], name: "index_risk_assessments_on_loan_application_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "first_name", default: "", null: false
@@ -78,9 +110,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_08_105748) do
     t.datetime "remember_created_at"
   end
 
+  add_foreign_key "collaterals", "loan_applications"
   add_foreign_key "credit_histories", "loan_applications"
   add_foreign_key "customer_infos", "loan_applications"
   add_foreign_key "financial_analyses", "loan_applications"
   add_foreign_key "loan_applications", "users"
   add_foreign_key "loan_details", "loan_applications"
+  add_foreign_key "recommendations", "loan_applications"
+  add_foreign_key "risk_assessments", "loan_applications"
 end
