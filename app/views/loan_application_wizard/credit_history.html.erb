@@ -18,6 +18,10 @@
       <%= f.text_area :defaults_or_late_payments, rows: 3, placeholder: "List any defaults or late payments", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
     </div>
 
+    <div class="flex justify-start mb-4">
+     <%= link_to "Back", wizard_path(@previous_step), class: "bg-gray-300 text-gray-700 px-4 py-2 rounded-md shadow hover:bg-gray-400 transition" %>
+    </div>
+
     <div class="flex justify-end">
       <%= f.submit "Next", class: "bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition" %>
     </div>
