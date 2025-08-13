@@ -5,15 +5,17 @@
       <%= link_to "Loan Appraisal", root_path, class: "hover:text-yellow-300 transition" %>
     </div>
 
-    <% if user_signed_in? %>
-      <%= link_to "Apply for Loan", start_loan_applications_path %>
-    <% end %>
-
+    <div class="hover:text-yellow-300 transition">
+      <% if user_signed_in? %>
+        <%= link_to "Apply for Loan", start_loan_applications_path %>
+      <% end %>
+    </div>
 
  
     <ul class="flex space-x-6 text-sm font-medium">
       <% if user_signed_in? %>
-        <li>
+        <li class="flex items-center space-x-2">
+          <p class="text-sm text-blue-400">hi, <%= current_user.email %>,</p>
           <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "hover:text-red-400 transition" %>
         </li>
       <% else%>

@@ -1,5 +1,6 @@
 class LoanApplication < ApplicationRecord
   belongs_to :user
+  
 
   has_one :customer_info, dependent: :destroy
   has_one :loan_detail, dependent: :destroy

@@ -24,5 +24,6 @@ class CustomersController < ApplicationController
 
   def set_customer
     @customer = CustomerInfo.find(params[:id])
+    @loandetail = LoanDetail.find_by(params[:id])
   end
 end
