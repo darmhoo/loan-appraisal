@@ -100,6 +100,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_11_083453) do
     t.index ["loan_application_id"], name: "index_risk_assessments_on_loan_application_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "first_name", default: "", null: false

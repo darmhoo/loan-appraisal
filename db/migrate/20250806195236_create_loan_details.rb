@@ -5,7 +5,7 @@ class CreateLoanDetails < ActiveRecord::Migration[8.0]
       t.string :loan_purpose
       t.string :loan_tenure
       t.string :repayment_frequency
-      t.references :loan_application, null: false, foreign_key: true
+      t.belongs_to :loan_application, null: false, foreign_key: true
 
       t.timestamps
     end
