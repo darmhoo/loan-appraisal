@@ -6,6 +6,8 @@ class LoanApplicationWizardController < ApplicationController
   STEPS = [ :customer_info, :loan_detail, :financial_analysis, :credit_history, :collateral, :risk_assessment, :recommendation ]
   steps *STEPS
 
+
+
   def show
     case step
     when :customer_info
@@ -26,6 +28,9 @@ class LoanApplicationWizardController < ApplicationController
     @previous_step = previous_step
     render_wizard
   end
+
+  
+
 
   def update
     case step
@@ -114,11 +119,14 @@ class LoanApplicationWizardController < ApplicationController
 
   # Only create a LoanApplication record once at first step
   def set_loan_application
-    if params[:loan_application_id]
-      @loan_application = current_user.loan_applications.find(params[:loan_application_id])
-    else
-      @loan_application = current_user.loan_applications.create!(status: "draft")
-    end
+    id = params[:loan_application_id] if params[:step].present? # in wizard routes
+  
+  if id.present?
+    @loan_application = LoanApplication.find(id)
+  else
+    flash[:alert] = "No loan application ID provided."
+    @loan_application = LoanApplication.new(user: current_user)
+  end
   end
 
   def customer_info_params

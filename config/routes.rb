@@ -2,21 +2,21 @@ Rails.application.routes.draw do
   resources :roles
   devise_for :users
   
-  root "customers#index"  
+  root "loan_applications#index"  # 👈 This makes Customers#index your root page
 
-  resources :customers, only: [:index, :destroy]
+  resources :customers, only: [:index, :destroy, :show]
 
-  resources :loan_applications, only: [:index] do
-    get 'start', on: :collection
+  resources :loan_applications, only: [:index, :destroy, :show] do
+  member do
+    get 'wizard/:step', to: 'loan_applications#wizard', as: 'wizard'
   end
 
-  # resources :loan_application_wizard, only: [:show, :update, :destroy]
-  
-  # config/routes.rb
+  collection do
+    get 'start', to: 'loan_applications#start'
+  end
+end
   resources :loan_application_wizard, only: [:show, :update] do
     delete :destroy, on: :collection
   end
-
-
 
 end

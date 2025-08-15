@@ -40,9 +40,12 @@
             <%= link_to "Delete",
               loan_application_wizard_index_path(loan_application_id: customer.loan_application_id),
               method: :delete,
-              data: { confirm: "Are you sure you want to delete this customer and all associated loan data?" },
-              class: "inline-block px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs"
-            %>
+              data: { confirm: "Are you sure you want to delete this customer?" },
+              class: "inline-block px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs" %>
+            <%= link_to "View",
+                  customer_path(customer),
+                   class: "inline-block px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs"
+              %>
           </td>
         </tr>
       <% end %>

@@ -8,7 +8,7 @@ class CreateCustomerInfos < ActiveRecord::Migration[8.0]
       t.string :employer
       t.decimal :income
       t.decimal :expenses
-      t.references :loan_application, null: false, foreign_key: true
+      t.belongs_to :loan_application, null: false, foreign_key: true
 
       t.timestamps
     end

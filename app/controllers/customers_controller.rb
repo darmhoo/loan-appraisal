@@ -13,6 +13,15 @@ class CustomersController < ApplicationController
     end
   end
 
+  def show
+    @customer = CustomerInfo.find(params[:id])
+    @loan_application = @customer.loan_application
+    @loan_detail = @loan_application.loan_detail
+    @financial_analysis = @loan_application.financial_analysis
+    @risk_assessment = @loan_application.risk_assessment
+    @recommendation = @loan_application.recommendation
+  end
+
 
 
   def destroy

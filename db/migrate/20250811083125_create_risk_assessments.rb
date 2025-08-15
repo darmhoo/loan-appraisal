@@ -4,7 +4,7 @@ class CreateRiskAssessments < ActiveRecord::Migration[8.0]
       t.string :risk_profile
       t.decimal :loan_to_value_ratio
       t.text :market_conditions
-      t.references :loan_application, null: false, foreign_key: true
+      t.belongs_to :loan_application, null: false, foreign_key: true
 
       t.timestamps
     end
