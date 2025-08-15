@@ -119,7 +119,14 @@ class LoanApplicationWizardController < ApplicationController
 
   # Only create a LoanApplication record once at first step
   def set_loan_application
-    @loan_application = LoanApplication.find(params[:loan_application_id])
+    id = params[:loan_application_id] if params[:step].present? # in wizard routes
+  
+  if id.present?
+    @loan_application = LoanApplication.find(id)
+  else
+    flash[:alert] = "No loan application ID provided."
+    @loan_application = LoanApplication.new(user: current_user)
+  end
   end
 
   def customer_info_params

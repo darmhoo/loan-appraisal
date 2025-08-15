@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :customers, only: [:index, :destroy, :show]
 
-  resources :loan_applications, only: [:index, :destroy] do
+  resources :loan_applications, only: [:index, :destroy, :show] do
   member do
     get 'wizard/:step', to: 'loan_applications#wizard', as: 'wizard'
   end
