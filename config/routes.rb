@@ -15,5 +15,8 @@ Rails.application.routes.draw do
     get 'start', to: 'loan_applications#start'
   end
 end
-  resources :loan_application_wizard, only: [:show, :update]
+  resources :loan_application_wizard, only: [:show, :update] do
+    delete :destroy, on: :collection
+  end
+
 end

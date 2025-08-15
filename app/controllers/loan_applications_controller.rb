@@ -7,7 +7,10 @@ class LoanApplicationsController < ApplicationController
       :customer_info, 
       :loan_detail,
       :financial_analysis,
-      :credit_history
+      :credit_history,
+      :collateral,
+      :risk_assessment,
+      :recommendation
       )
   end
 
