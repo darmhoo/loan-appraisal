@@ -1,45 +1,60 @@
-<div class="p-40  min-h-screen">
-  <div class="max-w-7xl mx-auto">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Loan Applications</h1>
+<div class="max-w-7xl mx-auto mt-6 px-4">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-semibold">Loan Applications</h2>
+    <%= link_to "Create Loan Application", new_loan_application_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow" %>
+  </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-lg border border-gray-200">
-      <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700 bg-white">
-        <thead class="bg-blue-50 text-gray-700 uppercase text-xs tracking-wider">
-          <tr>
-            <th class="px-6 py-3 border-r border-gray-200 text-left">Full Name</th>
-            <th class="px-6 py-3 border-r border-gray-200 text-left">Contact</th>
-            <th class="px-6 py-3 border-r border-gray-200 text-left">Employment Status</th>
-            <th class="px-6 py-3 border-r border-gray-200 text-left">Employer</th>
-            <th class="px-6 py-3 border-r border-gray-200 text-left">Income (₦)</th>
-            <th class="px-6 py-3 border-r border-gray-200 text-left">Status</th>
-            <th class="px-6 py-3 text-left">Actions</th>
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-200 rounded-lg">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Full Name</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Contact Details</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Employment Status</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Progress</th>
+          <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @loan_applications.each do |application| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 text-sm text-gray-800">  <%= application.full_name || "N/A" %></td>
+            <td class="px-4 py-2 text-sm text-gray-600"><%= truncate(application.contact_details, length: 50) %></td>
+            <td class="px-4 py-2 text-sm text-gray-600"><%= application.employment_status %></td>
+            <td class="px-4 py-2">
+              <% if application.completed? %>
+                <span class="inline-block px-2 py-1 text-xs font-semibold rounded bg-green-600 text-white">Completed</span>
+              <% else %>
+                <span class="inline-block px-2 py-1 text-xs font-semibold rounded bg-yellow-400 text-gray-800">In Progress</span>
+              <% end %>
+            </td>
+            <td class="px-4 py-2">
+              <div class="w-24 bg-gray-200 rounded-full h-3">
+                <% progress = (application.completed_steps.count.to_f / 7 * 100).round %>
+                <div class="bg-blue-600 h-3 rounded-full" style="width: <%= progress %>%"></div>
+              </div>
+              <small class="text-xs text-gray-600"><%= application.completed_steps.count %>/7 steps</small>
+            </td>
+            <td class="px-4 py-2 space-x-2">
+              <% unless application.completed? %>
+                <%= link_to "Resume", loan_application_step_path(id: application.next_step, loan_application_id: application.id), class: "bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded text-xs font-medium shadow" %>
+
+              <% end %>
+              <%= link_to "View", loan_application_path(application), class: "bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium shadow" %>
+              <%= link_to "Delete", loan_application_path(application), method: :delete, 
+                          confirm: "Are you sure?", class: "bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-xs font-medium shadow" %>
+            </td>
           </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100">
-          <% @loan_applications.each do |loan| %>
-            <tr class="hover:bg-gray-50 transition">
-              <td class="px-6 py-4 border-r border-gray-100"><%= loan.customer_info&.full_name || "-" %></td>
-              <td class="px-6 py-4 border-r border-gray-100"><%= loan.customer_info&.contact || "-" %></td>
-              <td class="px-6 py-4 border-r border-gray-100"><%= loan.customer_info&.employment_status || "-" %></td>
-              <td class="px-6 py-4 border-r border-gray-100"><%= loan.customer_info&.employer || "-" %></td>
-              <td class="px-6 py-4 border-r border-gray-100"><%= number_to_currency(loan.customer_info&.income || 0, unit: "₦", precision: 0) %></td>
-              <td class="px-6 py-4 border-r border-gray-100">
-                <span class="<%= loan.status? ? 'text-green-600  border-green-200 rounded-full px-3 py-1 text-xs font-semibold' : 'text-yellow-600 bg-yellow-50 border border-yellow-200 rounded-full px-3 py-1 text-xs font-semibold' %>">
-                  <%= loan.status? ? "Completed" : "In Progress" %>
-                </span>
-              </td>
-              <td class="px-6 py-4 flex space-x-4 items-center">
-                <%= link_to "Resume", loan_application_wizard_path(loan), class: "text-blue-600 hover:underline text-sm font-medium" %>
-                <%= button_to 'Delete', loan_application_path(loan), method: :delete, data: { confirm: 'Are you sure you want to delete this application?' }, class: 'cursor-pointer text-red-600 hover:underline bg-transparent border-none p-0 text-sm font-medium' %>
-                <%= link_to "View",
-                  loan_application_path(loan),
-                   class: "inline-block px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-xs"
-              %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% if @loan_applications.empty? %>
+      <div class="text-center py-10">
+        <h5 class="text-lg font-medium">No loan applications found</h5>
+        <p class="text-gray-500">Start by creating your first loan application</p>
+      </div>
+    <% end %>
   </div>
 </div>

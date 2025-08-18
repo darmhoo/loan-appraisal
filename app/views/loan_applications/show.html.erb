@@ -1,36 +1,99 @@
-<!-- app/views/customers/index.html.erb -->
-<div class="w-2/3 mx-auto my-10">
-  <button>
-    <%= link_to "Back", :back %>
-  </button>
-  <div class="p-5">
-    <h1 class="text-2xl font-bold mb-6 capitalize">Customer Detail</h1>
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg flex items-center justify-between p-5">
-      <div>
-        <div>Name: <%= @customer_info.full_name%></div>
-        <div>Contact: <%= @customer_info.contact %></div>
-        <div>ID: <%= @customer_info.id_number %></div>
-        <div>Employment Status: <%= @customer_info.employment_status %></div>
-        <div>Employer: <%= @customer_info.employer %></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div>
-      </div>
-    </div>
+<div class="container mx-auto mt-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-semibold">Loan Application Details - <%= @loan_application.full_name %></h2>
+    <%= link_to "Back to List", loan_applications_path, class: "px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600" %>
   </div>
-  <div class="p-5">
-    <h1 class="text-2xl font-bold mb-6 capitalize">Loan Application</h1>
-    <div class="overflow-x-auto bg-white shadow-md rounded-lg flex items-center justify-between p-5">
-      <div>
-        <div>Status: <%= @loan_application.status %></div>
-        <div>Date Opened: <%= @loan_detail.created_at %></div>
-        <div>Loan Amount: <%= number_to_currency(@loan_detail.loan_amount, unit: "₦", precision: 0) %></div>
-       
-      </div>
-      <div>
-      </div>
+
+  <!-- Step 1: Customer Information -->
+  <div class="bg-white shadow rounded-lg mb-4">
+    <div class="flex justify-between items-center px-4 py-2 border-b">
+      <h5 class="font-semibold">1. Customer Information</h5>
+      <%= link_to "Edit", loan_application_steps_path(loan_application_id: @loan_application.id, id: 'customer_info'), class: "px-3 py-1 border border-blue-500 text-blue-500 rounded-md text-sm hover:bg-blue-50" %>
+    </div>
+    <div class="p-4 overflow-x-auto">
+      <table class="w-full border border-gray-200 text-sm text-center">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="border px-4 py-2">Full Name</th>
+            <th class="border px-4 py-2">Contact Details</th>
+            <th class="border px-4 py-2">Identification</th>
+            <th class="border px-4 py-2">Employment Status</th>
+            <th class="border px-4 py-2">Employer</th>
+            <th class="border px-4 py-2">Monthly Income</th>
+            <th class="border px-4 py-2">Monthly Expenses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border px-4 py-2"><%= @loan_application.full_name %></td>
+            <td class="border px-4 py-2"><%= @loan_application.contact_details %></td>
+            <td class="border px-4 py-2"><%= @loan_application.identification %></td>
+            <td class="border px-4 py-2"><%= @loan_application.employment_status %></td>
+            <td class="border px-4 py-2"><%= @loan_application.employer %></td>
+            <td class="border px-4 py-2">$<%= number_with_delimiter(@loan_application.monthly_income) if @loan_application.monthly_income %></td>
+            <td class="border px-4 py-2">$<%= number_with_delimiter(@loan_application.monthly_expenses) if @loan_application.monthly_expenses %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-</div>
+  <!-- Step 2: Loan Details -->
+  <% if @loan_application.loan_amount.present? %>
+    <div class="bg-white shadow rounded-lg mb-4">
+      <div class="flex justify-between items-center px-4 py-2 border-b">
+        <h5 class="font-semibold">2. Loan Details</h5>
+        <%= link_to "Edit", loan_application_steps_path(loan_application_id: @loan_application.id, id: 'loan_details'), class: "px-3 py-1 border border-blue-500 text-blue-500 rounded-md text-sm hover:bg-blue-50" %>
+      </div>
+      <div class="p-4 overflow-x-auto">
+        <table class="w-full border border-gray-200 text-sm text-center">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="border px-4 py-2">Loan Amount</th>
+              <th class="border px-4 py-2">Purpose</th>
+              <th class="border px-4 py-2">Tenure</th>
+              <th class="border px-4 py-2">Repayment Frequency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2">$<%= number_with_delimiter(@loan_application.loan_amount) %></td>
+              <td class="border px-4 py-2"><%= @loan_application.purpose %></td>
+              <td class="border px-4 py-2"><%= @loan_application.tenure %> months</td>
+              <td class="border px-4 py-2"><%= @loan_application.repayment_frequency %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Step 3: Financial Analysis -->
+  <% if @loan_application.debt_to_income_ratio.present? %>
+    <div class="bg-white shadow rounded-lg mb-4">
+      <div class="flex justify-between items-center px-4 py-2 border-b">
+        <h5 class="font-semibold">3. Financial Analysis</h5>
+        <%= link_to "Edit", loan_application_steps_path(loan_application_id: @loan_application.id, id: 'financial_analysis'), class: "px-3 py-1 border border-blue-500 text-blue-500 rounded-md text-sm hover:bg-blue-50" %>
+      </div>
+      <div class="p-4 overflow-x-auto">
+        <table class="w-full border border-gray-200 text-sm text-center">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="border px-4 py-2">Debt-to-Income Ratio</th>
+              <th class="border px-4 py-2">Savings</th>
+              <th class="border px-4 py-2">Existing Loans</th>
+              <th class="border px-4 py-2">Assets</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2"><%= @loan_application.debt_to_income_ratio %>%</td>
+              <td class="border px-4 py-2">$<%= number_with_delimiter(@loan_application.savings) if @loan_application.savings %></td>
+              <td class="border px-4 py-2"><%= @loan_application.existing_loans %></td>
+              <td class="border px-4 py-2"><%= @loan_application.assets %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>

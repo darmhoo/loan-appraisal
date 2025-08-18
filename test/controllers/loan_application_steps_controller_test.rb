@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CreditHistoryTest < ActiveSupport::TestCase
+class LoanApplicationStepsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
