@@ -1,22 +1,14 @@
 Rails.application.routes.draw do
-  resources :roles
   devise_for :users
-  
-  root "loan_applications#index"  # 👈 This makes Customers#index your root page
+  root 'loan_applications#index'
 
-  resources :customers, only: [:index, :destroy, :show]
-
-  resources :loan_applications, only: [:index, :destroy, :show] do
-  member do
-    get 'wizard/:step', to: 'loan_applications#wizard', as: 'wizard'
+  resources :loan_applications, only: [:index, :show, :destroy, :new] do
+    member do
+      get 'resume' => 'loan_application_steps#show', step: :determine_step
+    end
   end
 
-  collection do
-    get 'start', to: 'loan_applications#start'
-  end
-end
-  resources :loan_application_wizard, only: [:show, :update] do
-    delete :destroy, on: :collection
-  end
+  # wizard steps under a separate namespace
+  resources :loan_application_steps, only: [:index, :show, :update], path: 'loan_app_steps'
 
 end

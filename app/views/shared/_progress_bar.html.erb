@@ -1,0 +1,25 @@
+<div class="mb-4">
+  <div class="w-full bg-gray-200 rounded-full h-8 overflow-hidden">
+    <% 
+      steps = %w[customer_info loan_details financial_analysis credit_history collateral risk_assessment recommendation]
+      current_step_index = steps.index(step.to_s) || 0
+      progress_percentage = ((current_step_index + 1).to_f / steps.length * 100).round
+    %>
+    <div class="bg-blue-600 h-8 flex items-center justify-center text-white text-sm font-medium"
+         style="width: <%= progress_percentage %>%"
+         role="progressbar"
+         aria-valuenow="<%= progress_percentage %>"
+         aria-valuemin="0" aria-valuemax="100">
+      Step <%= current_step_index + 1 %> of <%= steps.length %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-2 mt-2">
+    <% steps.each_with_index do |step_name, index| %>
+      <span class="px-2 py-1 rounded text-xs font-medium 
+        <%= index <= current_step_index ? 'bg-blue-600 text-white' : 'bg-gray-400 text-gray-800' %>">
+        <%= index + 1 %>. <%= step_name.humanize %>
+      </span>
+    <% end %>
+  </div>
+</div>

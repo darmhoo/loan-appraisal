@@ -2,8 +2,68 @@
 
 one:
   user: one
-  status: MyString
+  full_name: MyString
+  contact_details: MyText
+  identification: MyString
+  employment_status: MyString
+  employer: MyString
+  monthly_income: 9.99
+  monthly_expenses: 9.99
+  loan_amount: 9.99
+  purpose: MyText
+  tenure: 1
+  repayment_frequency: MyString
+  debt_to_income_ratio: 9.99
+  existing_loans: MyText
+  savings: 9.99
+  assets: MyText
+  credit_score: 1
+  past_behavior: MyText
+  defaults_late_payments: MyText
+  collateral_type: MyString
+  collateral_valuation: 9.99
+  ownership_documents: MyText
+  borrower_risk_profile: MyString
+  loan_to_value_ratio: 9.99
+  market_conditions: MyText
+  recommendation_status: MyString
+  suggested_amount: 9.99
+  interest_rate: 9.99
+  terms: MyText
+  conditions: MyText
+  current_step: MyString
+  completed: false
 
 two:
   user: two
-  status: MyString
+  full_name: MyString
+  contact_details: MyText
+  identification: MyString
+  employment_status: MyString
+  employer: MyString
+  monthly_income: 9.99
+  monthly_expenses: 9.99
+  loan_amount: 9.99
+  purpose: MyText
+  tenure: 1
+  repayment_frequency: MyString
+  debt_to_income_ratio: 9.99
+  existing_loans: MyText
+  savings: 9.99
+  assets: MyText
+  credit_score: 1
+  past_behavior: MyText
+  defaults_late_payments: MyText
+  collateral_type: MyString
+  collateral_valuation: 9.99
+  ownership_documents: MyText
+  borrower_risk_profile: MyString
+  loan_to_value_ratio: 9.99
+  market_conditions: MyText
+  recommendation_status: MyString
+  suggested_amount: 9.99
+  interest_rate: 9.99
+  terms: MyText
+  conditions: MyText
+  current_step: MyString
+  completed: false
