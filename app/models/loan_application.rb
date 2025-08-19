@@ -1,5 +1,7 @@
 class LoanApplication < ApplicationRecord
   belongs_to :user
+  before_save :set_loan_to_value_ratio_and_risk
+
 
   # Step 1 validations
   validates :full_name, presence: true, if: :step_1_or_later?
@@ -44,7 +46,26 @@ class LoanApplication < ApplicationRecord
   validates :recommendation_status, presence: true, if: :step_7_or_later?
   validates :suggested_amount, presence: true, if: :step_7_or_later?
   validates :interest_rate, presence: true, if: :step_7_or_later?
-  
+
+
+  # Calculate Loan-to-Value ratio
+  def calculate_ltv
+    return nil if loan_amount.blank? || collateral_valuation.blank? || collateral_valuation.to_f.zero?
+    (loan_amount.to_f / collateral_valuation.to_f * 100).round(2)
+  end
+
+  # Determine risk level from LTV
+  def calculate_ltv_risk
+      ltv = calculate_ltv
+      return nil if ltv.nil?
+
+      if ltv > 80
+        "High Risk"
+      else
+        "Acceptable Risk"
+      end
+  end
+ 
 
   def next_step
     steps = %w[customer_info loan_details financial_analysis credit_history collateral risk_assessment recommendation]
@@ -70,6 +91,13 @@ class LoanApplication < ApplicationRecord
   end
 
   private
+
+  def set_loan_to_value_ratio_and_risk
+    if loan_amount.present? && collateral_valuation.present?
+      self.loan_to_value_ratio = calculate_ltv
+      self.ltv_risk_level = calculate_ltv_risk
+    end
+  end
 
   def step_1_or_later?
     return false if current_step.blank?
