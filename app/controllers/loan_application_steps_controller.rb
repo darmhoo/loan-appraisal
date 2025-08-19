@@ -4,16 +4,25 @@ class LoanApplicationStepsController < ApplicationController
   
   steps :customer_info, :loan_details, :financial_analysis, :credit_history, :collateral, :risk_assessment, :recommendation
 
+  # def show
+  #   @loan_application = find_or_build_loan_application
+  #   render_wizard
+  # end
+  
   def show
     @loan_application = find_or_build_loan_application
+
+    if step == "recommendation"
+      # Assign in memory for display
+      @loan_application.loan_to_value_ratio ||= @loan_application.calculate_ltv
+      @loan_application.ltv_risk_level      ||= @loan_application.calculate_ltv_risk
+    end
+
     render_wizard
   end
 
-  # def index
-  #   # create a new loan application and redirect to first step
-  #   loan_application = current_user.loan_applications.create!
-  #   redirect_to loan_application_step_path(:customer_info, loan_application_id: loan_application.id)
-  # end
+
+
 
   def index
     loan_application = current_user.loan_applications.build
@@ -22,14 +31,15 @@ class LoanApplicationStepsController < ApplicationController
 
 
 
+
+  
   # def update
   #   @loan_application = find_or_build_loan_application
   #   @loan_application.assign_attributes(loan_application_params)
   #   @loan_application.current_step = step.to_s
-    
-  #   # Mark as completed if it's the last step
+
   #   @loan_application.completed = true if step == :recommendation
-    
+
   #   if @loan_application.save
   #     if params[:commit] == 'Save & Exit'
   #       redirect_to loan_applications_path, notice: 'Progress saved. You can resume later.'
@@ -43,11 +53,19 @@ class LoanApplicationStepsController < ApplicationController
   #   end
   # end
   
+
   def update
     @loan_application = find_or_build_loan_application
     @loan_application.assign_attributes(loan_application_params)
     @loan_application.current_step = step.to_s
 
+    # Always calculate LTV and risk if collateral and loan amount are present
+    if @loan_application.loan_amount.present? && @loan_application.collateral_valuation.present?
+      @loan_application.loan_to_value_ratio ||= @loan_application.calculate_ltv
+      @loan_application.ltv_risk_level      ||= @loan_application.calculate_ltv_risk
+    end
+
+    # Mark completed if we're on the last step
     @loan_application.completed = true if step == :recommendation
 
     if @loan_application.save
@@ -65,15 +83,9 @@ class LoanApplicationStepsController < ApplicationController
 
 
 
+
   private
 
-  # def find_or_build_loan_application
-  #   if params[:loan_application_id]
-  #     current_user.loan_applications.find(params[:loan_application_id])
-  #   else
-  #     current_user.loan_applications.build
-  #   end
-  # end
   
   def find_or_build_loan_application
     if params[:loan_application_id].present?

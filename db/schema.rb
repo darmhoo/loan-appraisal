@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_17_110330) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_19_123834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,7 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_110330) do
     t.string "full_name"
     t.text "contact_details"
     t.string "identification"
-    t.string "employment_status"  
+    t.string "employment_status"
     t.string "employer"
     t.decimal "monthly_income"
     t.decimal "monthly_expenses"
@@ -49,6 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_110330) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ltv_risk_level"
     t.index ["user_id"], name: "index_loan_applications_on_user_id"
   end
 
