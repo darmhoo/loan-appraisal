@@ -42,6 +42,9 @@ class LoanApplication < ApplicationRecord
 
   # Step 7 validations
   validates :recommendation_status, presence: true, if: :step_7_or_later?
+  validates :suggested_amount, presence: true, if: :step_7_or_later?
+  validates :interest_rate, presence: true, if: :step_7_or_later?
+  
 
   def next_step
     steps = %w[customer_info loan_details financial_analysis credit_history collateral risk_assessment recommendation]

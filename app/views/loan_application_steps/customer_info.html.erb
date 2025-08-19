@@ -3,7 +3,13 @@
   
   <%= render 'shared/progress_bar', step: step %>
 
-  <%= form_with model: @loan_application, url: wizard_path(step, loan_application_id: @loan_application.id), local: true do |form| %>
+  <%# <%= form_with model: @loan_application, url: wizard_path(step, loan_application_id: @loan_application.id), local: true do |form| %>
+  <%= form_with model: @loan_application, 
+              url: wizard_path(step, loan_application_id: @loan_application.id || 'new'), 
+              method: :put, 
+              local: true do |form| %>
+
+
     <% if @loan_application.errors.any? %>
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
         <ul class="list-disc pl-5">
