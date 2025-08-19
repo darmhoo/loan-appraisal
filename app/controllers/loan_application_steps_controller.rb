@@ -9,21 +9,47 @@ class LoanApplicationStepsController < ApplicationController
     render_wizard
   end
 
+  # def index
+  #   # create a new loan application and redirect to first step
+  #   loan_application = current_user.loan_applications.create!
+  #   redirect_to loan_application_step_path(:customer_info, loan_application_id: loan_application.id)
+  # end
+
   def index
-    # create a new loan application and redirect to first step
-    loan_application = current_user.loan_applications.create!
-    redirect_to loan_application_step_path(:customer_info, loan_application_id: loan_application.id)
+    loan_application = current_user.loan_applications.build
+    redirect_to loan_application_step_path(:customer_info, loan_application_id: 'new')
   end
 
 
+
+  # def update
+  #   @loan_application = find_or_build_loan_application
+  #   @loan_application.assign_attributes(loan_application_params)
+  #   @loan_application.current_step = step.to_s
+    
+  #   # Mark as completed if it's the last step
+  #   @loan_application.completed = true if step == :recommendation
+    
+  #   if @loan_application.save
+  #     if params[:commit] == 'Save & Exit'
+  #       redirect_to loan_applications_path, notice: 'Progress saved. You can resume later.'
+  #     elsif step == :recommendation
+  #       redirect_to loan_application_path(@loan_application), notice: 'Loan application completed successfully!'
+  #     else
+  #       redirect_to wizard_path(next_step, loan_application_id: @loan_application.id)
+  #     end
+  #   else
+  #     render_wizard
+  #   end
+  # end
+  
   def update
     @loan_application = find_or_build_loan_application
     @loan_application.assign_attributes(loan_application_params)
     @loan_application.current_step = step.to_s
-    
-    # Mark as completed if it's the last step
+
     @loan_application.completed = true if step == :recommendation
-    
+
     if @loan_application.save
       if params[:commit] == 'Save & Exit'
         redirect_to loan_applications_path, notice: 'Progress saved. You can resume later.'
@@ -37,15 +63,33 @@ class LoanApplicationStepsController < ApplicationController
     end
   end
 
+
+
   private
 
+  # def find_or_build_loan_application
+  #   if params[:loan_application_id]
+  #     current_user.loan_applications.find(params[:loan_application_id])
+  #   else
+  #     current_user.loan_applications.build
+  #   end
+  # end
+  
   def find_or_build_loan_application
-    if params[:loan_application_id]
-      current_user.loan_applications.find(params[:loan_application_id])
+    if params[:loan_application_id].present?
+      if params[:loan_application_id] == "new"
+        current_user.loan_applications.build # only for very first entry
+      else
+        current_user.loan_applications.find(params[:loan_application_id])
+      end
     else
       current_user.loan_applications.build
     end
   end
+
+
+
+
 
   def loan_application_params
     case step
