@@ -1,0 +1,73 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-bold mb-6">Loan Applications</h1>
+  <%= link_to "Create Loan Application", new_loan_application_path, class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow" %>
+</div>
+
+<div class="grid grid-cols-3 gap-6 mb-10">
+
+  <div class="p-6 rounded-lg shadow-lg bg-blue-600 text-white">
+    <h2 class="text-lg">Total Applications</h2>
+    <p class="text-3xl font-bold"><%= @total_applications %></p>
+  </div>
+
+  <div class="p-6 rounded-lg shadow-lg bg-green-600 text-white">
+    <h2 class="text-lg">Completed</h2>
+    <p class="text-3xl font-bold"><%= @completed_applications %></p>
+  </div>
+
+  <div class="p-6 rounded-lg shadow-lg bg-yellow-500 text-white">
+    <h2 class="text-lg">In Progress</h2>
+    <p class="text-3xl font-bold"><%= @in_progress_applications %></p>
+  </div>
+
+</div>
+
+<h1 class="text-2xl font-bold mb-6">Completed Loan Recommendation</h1>
+<div class="grid grid-cols-3 gap-6 mb-10">
+   <div class="p-6 rounded-lg shadow-lg bg-emerald-500 text-white">
+    <h2 class="text-lg">Approved</h2>
+    <p class="text-3xl font-bold"><%= @approved_applications %></p>
+  </div>
+
+  <div class="p-6 rounded-lg shadow-lg bg-red-600 text-white">
+    <h2 class="text-lg">Rejected</h2>
+    <p class="text-3xl font-bold"><%= @rejected_applications %></p>
+  </div>
+
+  <div class="p-6 rounded-lg shadow-lg bg-gray-600 text-white">
+    <h2 class="text-lg">Pending</h2>
+    <p class="text-3xl font-bold"><%= @pending_applications %></p>
+  </div>
+
+  
+</div>
+
+
+<!-- 📊 Loan Applications Trend (Line Chart) -->
+<div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+  <h2 class="text-xl font-semibold mb-4">Loan Applications Trend (Line Chart)</h2>
+
+ <%= bar_chart [
+  {name: "Total Applications", data: @loan_trends},
+  {name: "Approved", data: @approved_over_time},
+  {name: "Rejected", data: @rejected_over_time},
+  {name: "Pending",  data: @pending_over_time}
+],
+  stacked: false,
+  colors: ["#4e79a7", "#59a14f", "#e15759", "#f28e2b"],
+  library: {
+    animation: { duration: 1500, easing: "easeOutBounce" },
+    scales: { y: { beginAtZero: true } }
+  } %>
+
+</div>
+
+
+
+
+
+
+
+
+
+
