@@ -12,6 +12,11 @@ gem 'wicked'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
+gem "chartkick"
+gem "groupdate"
+gem "chart-js-rails"
+
+
 
 gem "pg", "~> 1.5", ">= 1.5.9"
 # Use sqlite3 as the database for Active Record
