@@ -18,7 +18,7 @@ gem "chart-js-rails"
 
 
 
-gem "pg", "~> 1.5", ">= 1.5.9"
+gem "pg", "~> 1.6"
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]
